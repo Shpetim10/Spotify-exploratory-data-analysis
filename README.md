@@ -8,20 +8,22 @@ In this project, we explore how Spotify popularity varies across artist, genre a
 
 ## Dataset
 
-We use the [Spotify Tracks Dataset (Kaggle)](https://www.kaggle.com/datasets/maharshipandya/-spotify-tracks-dataset), stored locally as `spotify.csv` (114,000 rows, 21 columns including the exported index).
+We use the [Spotify Tracks Dataset (Kaggle)](https://www.kaggle.com/datasets/maharshipandya/-spotify-tracks-dataset), stored locally as `data/spotify.csv` (114,000 rows, 21 columns including the exported index).
 
 - Each row is a **track–genre observation**, so the same `track_id` can appear several times.
 - `popularity` is Spotify's 0–100 score, based largely on recent plays. It is **not** a stream count.
 - Audio features (`danceability`, `energy`, `valence`, and so on) are scored from 0 to 1. `tempo` is in BPM, `loudness` in dB and `duration_ms` in milliseconds.
 
-## Repository contents
+## Repository structure
 
-| File | Description |
+| Path | Description |
 |---|---|
-| `Spotify_EDA.ipynb` | Our full analysis: loading, cleaning, hypotheses, association measures, conclusions and poster generation |
-| `spotify.csv` | Raw dataset |
-| `Spotify_Popularity_Poster_From_Notebook.pdf` | Summary poster (vector) |
-| `Spotify_Popularity_Poster_From_Notebook.png` | Summary poster (image) |
+| `notebooks/Spotify_EDA.ipynb` | Analysis: loading, cleaning, hypotheses, association measures, conclusions and poster generation |
+| `data/spotify.csv` | Raw dataset |
+| `reports/Spotify_Popularity_Poster_From_Notebook.pdf` | Summary poster (PDF) |
+| `reports/Spotify_Popularity_Poster_From_Notebook.png` | Summary poster (image) |
+| `requirements.txt` | Python dependencies |
+| `.gitignore` | Files that should not be committed |
 
 ## Hypotheses
 
@@ -58,7 +60,7 @@ We compare the mean popularity of the top and bottom quartile (H1, H2) and of ex
 
 Our poster summarises the findings with three graphs: a horizontal bar chart (what explains popularity), a scatter chart (H1 and H2) and an annotated heatmap (overall versus within-genre correlation). The notebook generates it as a PDF and PNG.
 
-![Poster](Spotify_Popularity_Poster_From_Notebook.png)
+![Poster](reports/Spotify_Popularity_Poster_From_Notebook.png)
 
 ## Getting started
 
@@ -69,13 +71,33 @@ Our poster summarises the findings with three graphs: a horizontal bar chart (wh
 - Jupyter (JupyterLab or Notebook)
 
 ```bash
-pip install numpy pandas matplotlib seaborn jupyterlab
+python -m pip install -r requirements.txt
 ```
 
 ### Run the analysis
 
 ```bash
-jupyter lab Spotify_EDA.ipynb
+jupyter lab notebooks/Spotify_EDA.ipynb
 ```
 
-Run all cells from top to bottom. The notebook reads `spotify.csv` from the same folder and writes the poster files next to it.
+Run all cells from top to bottom. The notebook reads `data/spotify.csv` and writes the PDF and PNG poster to `reports/`. It works when Jupyter's working directory is either the repository root or `notebooks/`.
+
+## Contributing to an existing GitHub repository
+
+If you are a collaborator, clone the **existing** repository and create a branch before adding these files. Do not create a second repository or upload the ZIP itself as a single file.
+
+```bash
+git clone https://github.com/OWNER/REPOSITORY.git
+cd REPOSITORY
+git switch -c chore/organize-spotify-eda
+```
+
+Copy this project's folders and files into the appropriate location in that clone, checking for existing files before replacing anything. Then run:
+
+```bash
+git add -A
+git commit -m "Organize Spotify EDA into folders"
+git push -u origin chore/organize-spotify-eda
+```
+
+On GitHub, open a pull request to merge the branch into the default branch. Replace `OWNER/REPOSITORY` with your team's repository address. If your team uses a different branch workflow, follow that convention.
